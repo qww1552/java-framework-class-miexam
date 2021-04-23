@@ -14,7 +14,9 @@ public class UserDaoTests {
     public void testGet() throws SQLException, ClassNotFoundException {
         Integer id = 1;
 
-        UserDao userDao = new UserDao(new JejuConnectionMaker());
+        DaoFactory daoFactory = new DaoFactory();
+        UserDao userDao = daoFactory.getUserDao();
+
         User user = userDao.get(id);
 
         assertThat(user.getId(), is(id));
@@ -28,7 +30,8 @@ public class UserDaoTests {
         user.setName(name);
         user.setPassword(password);
 
-        UserDao userDao = new UserDao(new JejuConnectionMaker());
+        DaoFactory daoFactory = new DaoFactory();
+        UserDao userDao = daoFactory.getUserDao();
 
         userDao.insert(user);
 
